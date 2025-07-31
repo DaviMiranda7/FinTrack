@@ -15,6 +15,7 @@ class AuthService: ObservableObject {
         }
     }
     
+    //Login apenas com email e senha
     func signIn(email: String, password: String) async throws {
         try await Auth.auth().signIn(withEmail: email, password: password)
         
@@ -26,7 +27,7 @@ class AuthService: ObservableObject {
         print("Password saved to keychain: \(passwordSaved)")
     }
 
-    
+    //Login com faceID
     func signInWithBiometrics() async throws {
         let context = LAContext()
         var error: NSError?
@@ -50,6 +51,7 @@ class AuthService: ObservableObject {
         }
     }
     
+    //Login com Email Google
     func signInWithGoogle() async throws {
         guard let windowScene = await UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = await windowScene.windows.first,
@@ -80,7 +82,7 @@ class AuthService: ObservableObject {
         }
     }
 
-    
+    //Registrar apenas com email e senha
     func signUp(email: String, password: String, name: String) async throws {
         do {
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
@@ -103,6 +105,7 @@ class AuthService: ObservableObject {
         }
     }
     
+    //Funcao para deslogar
     func signOut() throws {
         try Auth.auth().signOut()
         GIDSignIn.sharedInstance.signOut()

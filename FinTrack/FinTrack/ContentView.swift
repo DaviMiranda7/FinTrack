@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  FinTrack
-//
-//  Created by Davi Miranda on 31/07/25.
-//
-
 import SwiftUI
 
 struct ContentView: View {

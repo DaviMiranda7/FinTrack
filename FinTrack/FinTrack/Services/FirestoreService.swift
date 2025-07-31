@@ -7,6 +7,8 @@ class FirestoreService {
     
     private init() {}
     
+    
+    //Funcao para salvar usuario
     func saveUser(_ user: User) async throws {
         let userData: [String: Any] = [
             "id": user.id,
@@ -18,6 +20,7 @@ class FirestoreService {
         try await db.collection("users").document(user.id).setData(userData)
     }
     
+    //Funcao para pegar usuario
     func getUser(id: String) async throws -> User? {
         let document = try await db.collection("users").document(id).getDocument()
         guard let data = document.data() else { return nil }
@@ -31,6 +34,7 @@ class FirestoreService {
         )
     }
     
+    //Salvar alguma transacao que foi feita
     func saveTransaction(_ transaction: Transaction) async throws {
         let transactionData: [String: Any] = [
             "id": transaction.id,
@@ -44,6 +48,7 @@ class FirestoreService {
         try await db.collection("transactions").document(transaction.id).setData(transactionData)
     }
     
+    //Pegar as transacoes que ja aconteceram
     func getTransactions(for userId: String) async throws -> [Transaction] {
         let snapshot = try await db.collection("transactions")
             .whereField("userId", isEqualTo: userId)
@@ -64,6 +69,7 @@ class FirestoreService {
         }
     }
     
+    //Atualizar saldo do usuario
     func updateUserBalance(_ userId: String, newBalance: Double) async throws {
         try await db.collection("users").document(userId).updateData([
             "balance": newBalance

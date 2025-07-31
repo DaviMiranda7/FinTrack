@@ -6,6 +6,7 @@ class NotificationService {
     static let shared = NotificationService()
     private init() {}
     
+    //Mandar notificacao para usuario sobre as atividades de sua conta
     func sendBalanceNotification(oldBalance: Double, newBalance: Double, transaction: Transaction) {
         let content = UNMutableNotificationContent()
         content.title = "FinTrack - Saldo Atualizado"
@@ -31,6 +32,7 @@ class NotificationService {
         UNUserNotificationCenter.current().add(request)
     }
     
+    //Alerta de seguranca caso algum seja ativo
     func sendSecurityAlert(message: String) {
         let content = UNMutableNotificationContent()
         content.title = "🔒 FinTrack - Alerta de Segurança"

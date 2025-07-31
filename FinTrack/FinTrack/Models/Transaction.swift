@@ -1,5 +1,6 @@
 import Foundation
 
+// Representa uma transação financeira, como entrada ou saída de dinheiro
 struct Transaction: Identifiable {
     let id: String
     let userId: String
@@ -9,6 +10,7 @@ struct Transaction: Identifiable {
     let description: String
     let date: Date
     
+    // Inicializador que cria uma transação, gerando um id único se não for passado
     init(id: String = UUID().uuidString, userId: String, amount: Double, type: TransactionType, category: Category, description: String, date: Date = Date()) {
         self.id = id
         self.userId = userId
@@ -20,10 +22,12 @@ struct Transaction: Identifiable {
     }
 }
 
+// Define os tipos possíveis de transação: entrada ou saída
 enum TransactionType: String, CaseIterable {
     case income = "income"
     case expense = "expense"
     
+    // Nome amigável para exibir na interface do usuário
     var displayName: String {
         switch self {
         case .income: return "Entrada"
@@ -32,14 +36,16 @@ enum TransactionType: String, CaseIterable {
     }
 }
 
+// Define as categorias possíveis para classificar uma transação
 enum Category: String, CaseIterable {
     case food = "food"
     case transport = "transport"
     case entertainment = "entertainment"
     case health = "health"
     case salary = "salary"
-    case other = "other"
+    case other = "other"             
     
+    // Nome amigável para mostrar ao usuário
     var displayName: String {
         switch self {
         case .food: return "Alimentação"
